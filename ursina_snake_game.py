@@ -16,10 +16,11 @@ DirectionalLight(y=2, z=3, rotation=(45, -45, 45))
 # 3. Camera Setup (Using EditorCamera for easy navigation during early development)
 # EditorCamera() 
 # For a game, we might want a fixed camera later, e.g.:
-camera.position = (0, 30, -30) 
-camera.rotation_x = 45          
-camera.rotation_y = 0         
-camera.fov = 55
+# camera.position = (0, 30, -30) 
+# camera.rotation_x = 45          
+# camera.rotation_y = 0         
+# camera.fov = 55
+EditorCamera() # Enables free-look mouse controls
 # camera.orthographic = True # For a more classic, non-perspective view if desired later
 # camera.fov = 10 # if orthographic
 
@@ -242,13 +243,13 @@ def input(key):
 
     # Snake movement controls (XZ plane) - only if not game_over
     new_direction_vector = None
-    if key == 'arrow_right' or key == 'd':
+    if key == 'arrow_right' or key == 'k': # Changed 'd' to 'k'
         new_direction_vector = Vec3(1,0,0)
-    elif key == 'arrow_left' or key == 'a':
+    elif key == 'arrow_left' or key == 'h': # Changed 'a' to 'h'
         new_direction_vector = Vec3(-1,0,0)
-    elif key == 'arrow_up' or key == 'w': # Moving "forward" on Z axis
+    elif key == 'arrow_up' or key == 'u': # Changed 'w' to 'u'
         new_direction_vector = Vec3(0,0,1)
-    elif key == 'arrow_down' or key == 's': # Moving "backward" on Z axis
+    elif key == 'arrow_down' or key == 'j': # Changed 's' to 'j'
         new_direction_vector = Vec3(0,0,-1)
 
     if new_direction_vector:

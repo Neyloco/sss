@@ -18,12 +18,17 @@ A 3D version of the classic Snake game, implemented in Python using the Ursina e
         ```
 
 3.  **Controls:**
-    *   Use the **Arrow Keys** or **WASD Keys** to control the direction of the snake on the 3D plane (XZ axes).
-        *   **Up Arrow / W:** Move snake forward (positive Z)
-        *   **Down Arrow / S:** Move snake backward (negative Z)
-        *   **Left Arrow / A:** Move snake left (negative X)
-        *   **Right Arrow / D:** Move snake right (positive X)
+    *   **Camera (Mouse):**
+        *   **Rotate View:** Right-Click + Drag Mouse.
+        *   **Zoom:** Scroll Mouse Wheel.
+        *   **Pan/Move Camera:** Middle-Click + Drag Mouse. (WASD keys can also pan the camera when the mouse isn't dragging for rotation/panning).
+    *   **Snake Movement (Keyboard):**
+        *   Use **U Key** or **Up Arrow** to move snake forward (positive Z).
+        *   Use **J Key** or **Down Arrow** to move snake backward (negative Z).
+        *   Use **H Key** or **Left Arrow** to move snake left (negative X).
+        *   Use **K Key** or **Right Arrow** to move snake right (positive X).
     *   Press **Escape** to quit the game.
+    *   When the game is over: Press **R** to Restart. 
 
 4.  **Goal:**
     *   Guide the snake to eat the red food spheres that appear in the game area.
@@ -37,11 +42,11 @@ A 3D version of the classic Snake game, implemented in Python using the Ursina e
 *   Snake growth upon eating food.
 *   Score tracking and display.
 *   Game over detection for boundary and self-collision.
-*   Basic 3D environment with a fixed isometric-style camera.
+*   Basic 3D environment with free-look mouse camera control (`EditorCamera`).
+*   Game restart option from the Game Over screen.
 
 ## Future Enhancements (Potential)
 
-*   Restart game option.
 *   Advanced visual effects or textures.
 *   More complex game levels or obstacles.
 *   Enemy snakes or other challenges.
