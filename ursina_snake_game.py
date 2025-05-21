@@ -16,9 +16,10 @@ DirectionalLight(y=2, z=3, rotation=(45, -45, 45))
 # 3. Camera Setup (Using EditorCamera for easy navigation during early development)
 # EditorCamera() 
 # For a game, we might want a fixed camera later, e.g.:
-camera.position = (15, 18, -22) # Adjusted: slightly lower and closer
-camera.rotation_x = 45          # Angled down
-camera.rotation_y = -30         # Slightly rotated view
+camera.position = (0, 30, -30) 
+camera.rotation_x = 45          
+camera.rotation_y = 0         
+camera.fov = 55
 # camera.orthographic = True # For a more classic, non-perspective view if desired later
 # camera.fov = 10 # if orthographic
 
@@ -81,6 +82,27 @@ class Snake:
             
     def eat_food(self):
         self.grow_pending += 1
+
+    def reset(self, start_position=Vec3(0,0.5,0), initial_length=3):
+        # Destroy existing segment entities
+        for seg in self.segments:
+            destroy(seg)
+        
+        self.segments = []
+        self.positions = []
+        self.direction = Vec3(1,0,0)  # Original initial direction
+        self.grow_pending = 0
+
+        for i in range(initial_length):
+            pos = start_position - Vec3(i * self.segment_size, 0, 0)
+            self.positions.append(pos)
+            segment = Entity(
+                model='cube',
+                color=self.head_color if i == 0 else self.body_color,
+                position=pos,
+                scale=self.segment_size
+            )
+            self.segments.append(segment)
 
 # Instantiate Snake
 player_snake = Snake()
@@ -153,17 +175,32 @@ game_over_text_display = Text(
     enabled=False
 )
 
+# Game Reset Function
+def reset_game():
+    global game_over_state, score, move_timer, player_snake, game_food
+    
+    player_snake.reset() # Uses default start_position and initial_length
+    game_food.respawn(player_snake.positions)
+    
+    score = 0
+    game_over_state = False
+    move_timer = 0
+    
+    game_over_text_display.enabled = False
+    score_text_display.text = f"Score: {score}"
+
+
 def update():
-    global move_timer, game_over_state, score # Changed from nonlocal to global
+    global move_timer, game_over_state, score 
 
     if game_over_state:
         return
 
-    move_timer += time.dt * snake_speed # time.dt is delta time since last frame
+    move_timer += time.dt * snake_speed 
 
     if move_timer >= 1:
         player_snake.move()
-        move_timer = 0 # Reset timer
+        move_timer = 0 
 
         head_pos = player_snake.positions[0]
 
@@ -187,19 +224,23 @@ def update():
     # UI Updates
     score_text_display.text = f"Score: {score}"
     if game_over_state:
-        game_over_text_display.text = "Game Over!"
+        game_over_text_display.text = "Game Over! Press 'R' to Restart" # Updated message
         game_over_text_display.enabled = True
 
 # Function to handle input
 def input(key):
-    global game_over_state # To potentially allow restart in future
+    global game_over_state 
 
     if key == 'escape':
         application.quit()
-    
-    if game_over_state: # No input if game is over (except escape)
-        return
 
+    if game_over_state:
+        if key == 'r':
+            print("R key pressed for restart") # Diagnostic print
+            reset_game()
+        return # Other inputs ignored if game is over
+
+    # Snake movement controls (XZ plane) - only if not game_over
     new_direction_vector = None
     if key == 'arrow_right' or key == 'd':
         new_direction_vector = Vec3(1,0,0)
@@ -212,7 +253,6 @@ def input(key):
 
     if new_direction_vector:
         player_snake.change_direction(new_direction_vector)
-    # Future: Add restart key 'r' here if game_over_state is True
 
 # Start the application
 app.run()
