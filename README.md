@@ -1,46 +1,49 @@
-# Python Snake Game
+# 3D Python Snake Game (Ursina Engine)
 
-A classic Snake game implemented in Python using the Pygame library.
+A 3D version of the classic Snake game, implemented in Python using the Ursina engine.
 
 ## How to Play
 
-1.  **Run the game:**
-    ```bash
-    python snake_game.py
-    ```
-2.  **Name Your Snake:**
-    *   At the start, type a name for your snake (up to 10 characters) and press **Enter**. If you don't type anything, a default name will be used.
+1.  **Ensure Dependencies:**
+    *   Make sure you have Python 3 and the Ursina engine installed.
+    *   If you don't have Ursina, install it via pip:
+        ```bash
+        pip install ursina
+        ```
+
+2.  **Run the game:**
+    *   Execute the Python script:
+        ```bash
+        python ursina_snake_game.py
+        ```
+
 3.  **Controls:**
-    *   Use the **Arrow Keys** (Up, Down, Left, Right) to control the direction of the snake.
-    *   When the game is over:
-        *   Press **R** to Restart the game.
-        *   Press **Q** to Quit the game.
+    *   Use the **Arrow Keys** or **WASD Keys** to control the direction of the snake on the 3D plane (XZ axes).
+        *   **Up Arrow / W:** Move snake forward (positive Z)
+        *   **Down Arrow / S:** Move snake backward (negative Z)
+        *   **Left Arrow / A:** Move snake left (negative X)
+        *   **Right Arrow / D:** Move snake right (positive X)
+    *   Press **Escape** to quit the game.
+
 4.  **Goal:**
-    *   Guide the snake to eat the red food blocks that appear on the screen.
+    *   Guide the snake to eat the red food spheres that appear in the game area.
     *   Each piece of food eaten makes the snake grow longer and increases your score.
-    *   Eating 3 consecutive apples activates a temporary **Turbo Boost** for your snake!
-    *   Avoid running into the walls, the snake's own body, or the blue **Enemy Snake**. The game ends if this happens.
+    *   Avoid running into the game boundaries or the snake's own body. The game ends if this happens.
 
-## Requirements
+## Game Features (Current - Part 1)
 
-*   Python 3
-*   Pygame
+*   3D snake movement on a grid.
+*   Random food placement in 3D space.
+*   Snake growth upon eating food.
+*   Score tracking and display.
+*   Game over detection for boundary and self-collision.
+*   Basic 3D environment with a fixed isometric-style camera.
 
-## Installation
+## Future Enhancements (Potential)
 
-If you don't have Pygame installed, you can install it using pip:
-
-```bash
-pip install pygame
+*   Restart game option.
+*   Advanced visual effects or textures.
+*   More complex game levels or obstacles.
+*   Enemy snakes or other challenges.
+*   Sound effects.
 ```
-
-## Game Features
-
-*   Classic snake gameplay.
-*   Player-definable snake name displayed during gameplay.
-*   Score tracking.
-*   Turbo Boost: Eating 3 apples activates a temporary speed increase.
-*   Enemy Snake: A computer-controlled snake moves randomly, adding an extra challenge.
-*   Game over detection (wall collision, self-collision, and enemy collision).
-*   Random food placement.
-*   Restart and Quit options from the Game Over screen.
