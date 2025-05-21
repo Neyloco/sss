@@ -266,7 +266,7 @@ def main():
         surface.blit(game_over_text, text_rect)
 
         restart_quit_text = current_font.render("Press 'R' to Restart or 'Q' to Quit", True, color)
-        restart_quit_rect = restart_quit_text.get_rect(center=(sw // 2, text_rect.center_y + 40))
+        restart_quit_rect = restart_quit_text.get_rect(center=(sw // 2, text_rect.centery + 40)) # Corrected center_y to centery
         surface.blit(restart_quit_text, restart_quit_rect)
 
     def reset_game_state():
