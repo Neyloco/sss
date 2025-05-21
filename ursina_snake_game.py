@@ -190,7 +190,7 @@ def update():
 
 # Function to handle input
 def input(key):
-    nonlocal game_over_state # To potentially allow restart in future
+    global game_over_state # To potentially allow restart in future
     if key == 'escape':
         application.quit()
     
