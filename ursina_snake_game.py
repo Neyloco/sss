@@ -76,6 +76,8 @@ class Snake:
         # Prevent the snake from reversing onto itself
         if new_dir_vec != -self.direction:
             self.direction = new_dir_vec
+        else:
+            pass # Rejected 180-degree turn, no print needed now
             
     def eat_food(self):
         self.grow_pending += 1
@@ -191,21 +193,25 @@ def update():
 # Function to handle input
 def input(key):
     global game_over_state # To potentially allow restart in future
+
     if key == 'escape':
         application.quit()
     
     if game_over_state: # No input if game is over (except escape)
         return
 
-    # Snake movement controls (XZ plane)
+    new_direction_vector = None
     if key == 'arrow_right' or key == 'd':
-        player_snake.change_direction(Vec3(1,0,0))
+        new_direction_vector = Vec3(1,0,0)
     elif key == 'arrow_left' or key == 'a':
-        player_snake.change_direction(Vec3(-1,0,0))
+        new_direction_vector = Vec3(-1,0,0)
     elif key == 'arrow_up' or key == 'w': # Moving "forward" on Z axis
-        player_snake.change_direction(Vec3(0,0,1))
+        new_direction_vector = Vec3(0,0,1)
     elif key == 'arrow_down' or key == 's': # Moving "backward" on Z axis
-        player_snake.change_direction(Vec3(0,0,-1))
+        new_direction_vector = Vec3(0,0,-1)
+
+    if new_direction_vector:
+        player_snake.change_direction(new_direction_vector)
     # Future: Add restart key 'r' here if game_over_state is True
 
 # Start the application
