@@ -10,7 +10,7 @@ ground = Entity(model='plane', scale=(30, 1, 30), color=color.lime.tint(-.2), te
 # Making it a bit larger for now, will define game area later
 
 # 2. Basic Lighting
-DirectionalLight(parent=pivot, y=2, z=3, rotation=(45, -45, 45))
+DirectionalLight(y=2, z=3, rotation=(45, -45, 45))
 # AmbientLight(color=color.rgba(100, 100, 100, 0.1)) # Softer ambient light
 
 # 3. Camera Setup (Using EditorCamera for easy navigation during early development)
