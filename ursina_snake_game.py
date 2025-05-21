@@ -152,7 +152,7 @@ game_over_text_display = Text(
 )
 
 def update():
-    nonlocal move_timer, game_over_state, score # Allow modification
+    global move_timer, game_over_state, score # Changed from nonlocal to global
 
     if game_over_state:
         return
